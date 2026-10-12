@@ -9,4 +9,5 @@ app_name = "shop"
 
 urlpatterns = [
     path("", views.home, name="home"),
+    path("test-page/", views.test_page, name="test_page"),
 ]
