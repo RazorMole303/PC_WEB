@@ -1,26 +1,35 @@
+
 {% extends "base.html" %}
 {% load static %}
 
+{% block title %}ByteBarn — PC parts without the guesswork{% endblock %}
 
-<html lang="en">
+{% block content %}
+<div class="hero p-4 p-lg-5 mb-4">
+  <h1 class="display-5 fw-bold">ByteBarn</h1>
+  <p class="lead mb-3">
+    CPUs, graphics cards, memory and everything in between. Work out what it
+    costs before you spend anything.
+  </p>
+  <a href="#" class="btn btn-light btn-lg me-2">Open the PC Builder</a>
+  <a href="{% url 'shop:product_list' %}" class="btn btn-outline-light btn-lg">Browse the shop</a>
+</div>
 
-<head>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ByteBarn</title>
-</head>
+<h2 class="mb-3">Featured this week</h2>
 
-<body>
-   {% block content %}
-  <div class="hero p-4 p-lg-5 mb-4">
-    <h1 class="display-5 fw-bold">ByteBarn</h1>
-    <p class="lead mb-3">PC parts without the guesswork.</p>
-    <a href="#" class="btn btn-primary btn-lg">Browse the shop</a>
+{% if products %}
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4">
+    {% for product in products %}
+      <div class="col">
+        {% include "shop/product_card.html" with product=product %}
+      </div>
+    {% endfor %}
   </div>
+{% else %}
+  <div class="empty-state p-5 text-center text-body-secondary">
+    <p class="mb-1">No products yet.</p>
+    <p class="mb-0">Load the sample data with <code>python manage.py seed_shop</code>.</p>
+  </div>
+{% endif %}
 {% endblock %}
-
-</body>
-
-</html>
+```   
